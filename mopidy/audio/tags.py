@@ -125,7 +125,7 @@ def _extract_buffer_data(buf):
 
 # TODO: split based on "stream" and "track" based conversion? i.e. handle data
 # from radios in it's own helper instead?
-def convert_tags_to_track(tags):
+def convert_tags_to_track(tags, album_path = None):
     """Convert our normalized tags to a track.
 
     :param  tags: dictionary of tag keys with a list of values
@@ -164,6 +164,8 @@ def convert_tags_to_track(tags):
     album_kwargs["num_tracks"] = tags.get(Gst.TAG_TRACK_COUNT, [None])[0]
     album_kwargs["num_discs"] = tags.get(Gst.TAG_ALBUM_VOLUME_COUNT, [None])[0]
     album_kwargs["musicbrainz_id"] = tags.get("musicbrainz-albumid", [None])[0]
+    if album_path is not None:
+        album_kwargs["path"] = album_path
 
     album_kwargs["date"] = tags.get(Gst.TAG_DATE, [None])[0]
     if not album_kwargs["date"]:

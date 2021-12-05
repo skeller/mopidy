@@ -44,6 +44,9 @@ class Ref(ValidatedImmutableObject):
     type = fields.Identifier()  # TODO: consider locking this down.
     # type = fields.Field(choices=(ALBUM, ARTIST, DIRECTORY, PLAYLIST, TRACK))
 
+    audio_ext = fields.String()
+    path = fields.String()
+
     #: Constant used for comparison with the :attr:`type` field.
     ALBUM = "album"
 
@@ -174,6 +177,8 @@ class Album(ValidatedImmutableObject):
     #: The MusicBrainz ID of the album. Read-only.
     musicbrainz_id = fields.Identifier()
 
+    path = fields.String()
+
 
 class Track(ValidatedImmutableObject):
 
@@ -258,6 +263,7 @@ class Track(ValidatedImmutableObject):
     #: equivalent timestamp or simply a version counter.
     last_modified = fields.Integer(min=0)
 
+    audio_ext = fields.String()
 
 class TlTrack(ValidatedImmutableObject):
 
